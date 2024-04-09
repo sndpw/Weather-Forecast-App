@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 export const geoApiOptions = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "b7432f8359msh9a14f65f2eb87a8p185220jsnca5f5071fbc8",
+    "X-RapidAPI-Key": process.env.RAPID_API_KEY || "",
     "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
   },
 };

@@ -6,7 +6,7 @@ import {
   TableBody,
   TableCell,
 } from "@mui/material";
-import Link from "@material-ui/core/Link";
+// import Link from "@material-ui/core/Link";
 import { TablePagination } from "@mui/material";
 import { fetchCitiesData, City } from "@/app/api/route";
 import CurrentWeather from "@/app/components/CurrentWeather";
@@ -65,7 +65,7 @@ const CitiesTable: React.FC<{ CurrentWeather: any; forecast: any }> = ({
             : filteredData
           ).map((row, index) => (
             <TableRow key={index}>
-              <Link
+              {/* <Link
                 onClick={() => {
                   if (CurrentWeather && forecast) {
                     return (
@@ -76,9 +76,9 @@ const CitiesTable: React.FC<{ CurrentWeather: any; forecast: any }> = ({
                     );
                   }
                 }}
-              >
+              > */}
                 <TableCell className="font-medium">{row.name}</TableCell>
-              </Link>
+              {/* </Link> */}
               <TableCell className="font-medium">{row.country}</TableCell>
               <TableCell className="font-medium">{row.population}</TableCell>
               <TableCell className="font-medium">{row.timezone}</TableCell>

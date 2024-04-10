@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 
 interface City {
   name: string;
@@ -10,10 +10,7 @@ interface City {
   country: string;
 }
 
-export const GET = async (
-  req: NextApiRequest,
-  res: NextApiResponse<City[] | { error: string }>
-) => {
+export const GET = async (request: Request) => {
   try {
     const response = await axios.get(
       "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/records?where=population>1000000&limit=100&offset=0&refine=cou_name_en%3A%22India%22&refine=timezone%3A%22Asia%2FKolkata%22"

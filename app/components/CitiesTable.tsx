@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 // import Link from "@material-ui/core/Link";
 import { TablePagination } from "@mui/material";
-import { fetchCitiesData, City } from "@/app/api/route";
+// import { City } from "@/app/api/weather/route";
 import CurrentWeather from "@/app/components/CurrentWeather";
 import Forecast from "@/app/components/Forecast";
 
@@ -22,11 +22,26 @@ const CitiesTable: React.FC<{ CurrentWeather: any; forecast: any }> = ({
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[0]);
   const [searchValue, setSearchValue] = useState("");
-
+  interface City {
+    name: string;
+    latitude: number;
+    longitude: number;
+    population: number;
+    timezone: string;
+    country: string;
+  }
   useEffect(() => {
     async function fetchData() {
-      const citiesData: City[] = await fetchCitiesData();
-      setData(citiesData);
+      try {
+        const response = await fetch("/api/weather"); // Call the API route
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const citiesData: City[] = await response.json();
+        setData(citiesData);
+      } catch (error) {
+        console.error("Error fetching cities data:", error);
+      }
     }
     fetchData();
   }, []);
@@ -35,7 +50,9 @@ const CitiesTable: React.FC<{ CurrentWeather: any; forecast: any }> = ({
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -77,7 +94,7 @@ const CitiesTable: React.FC<{ CurrentWeather: any; forecast: any }> = ({
                   }
                 }}
               > */}
-                <TableCell className="font-medium">{row.name}</TableCell>
+              <TableCell className="font-medium">{row.name}</TableCell>
               {/* </Link> */}
               <TableCell className="font-medium">{row.country}</TableCell>
               <TableCell className="font-medium">{row.population}</TableCell>

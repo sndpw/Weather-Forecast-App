@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Search from "@/app/components/Search";
 import CurrentWeather from "@/app/components/CurrentWeather";
 import Forecast from "@/app/components/Forecast";
-import { WEATHER_API_URL, WEATHER_API_KEY } from "@/app/api/weather/route";
+import { WEATHER_API_URL, WEATHER_API_KEY } from "@/app/utils/apis";
 
 import CitiesTable from "@/app/components/CitiesTable";
 

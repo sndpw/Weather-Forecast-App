@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import Search from "@/app/components/Search";
 import CurrentWeather from "@/app/components/CurrentWeather";
@@ -6,6 +6,7 @@ import Forecast from "@/app/components/Forecast";
 import { WEATHER_API_URL, WEATHER_API_KEY } from "@/app/utils/apis";
 
 import CitiesTable from "@/app/components/CitiesTable";
+import CurrentCityWeather from "./CurrentCityWeather";
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState<any>(null);
@@ -30,13 +31,15 @@ function App() {
         setForecast({ city: searchData.label, ...forcastResponse });
       })
       .catch(console.log);
+
+      console.log(currentWeather);
+      console.log(forecast);
   };
 
   return (
     <div className="container">
       <Search onSearchChange={handleOnSearchChange} />
-      {currentWeather && <CurrentWeather data={currentWeather} />}
-      {forecast && <Forecast data={forecast} />}
+      {/* {{currentWeather, forecast} && <CurrentCityWeather currentWeather={currentWeather} forecast={forecast}/>} */}
       <CitiesTable CurrentWeather={currentWeather} forecast={forecast} />
     </div>
   );

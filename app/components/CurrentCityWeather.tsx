@@ -1,37 +1,15 @@
-// import CurrentCityWeather from '@/app/components/CurrentCityWeather'
-// import React from 'react'
+// CurrentCityWeather.tsx
 
-// function page() {
-//   return (
-//     <div>
-//      <CurrentCityWeather />
-//     </div>
-//   )
-// }
-
-// export default page
-
-// pages/cities/[id]/page.tsx
-// pages/cities/[id]/page.tsx
-"use client";
 import React, { useEffect, useState } from "react";
-import CurrentWeather from "@/app/components/CurrentWeather";
-import Forecast from "@/app/components/Forecast";
-import { WEATHER_API_URL, WEATHER_API_KEY } from "@/app/utils/apis";
-import { useSearchParams } from "next/navigation";
-import CurrentCityWeather from "../../../components/CurrentCityWeather"; // Adjust the path as needed
-type UpdateEventProps = {
-  params: {
-    id: string;
-  };
-};
+import CurrentWeather from "./CurrentWeather";
+import Forecast from "./Forecast";
+import { WEATHER_API_URL, WEATHER_API_KEY } from "@/app/utils/apis"; // Adjust the path as needed
 
-const CityPage =  ({ params: { id } }: UpdateEventProps) => {
+function CurrentCityWeather(cityName: any) {
   const [currentWeather, setCurrentWeather] = useState<any>(null);
   const [forecast, setForecast] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
-  const cityName = id;
-  console.log("getttt ", cityName);
+console.log("getttt ", cityName);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -71,16 +49,6 @@ const CityPage =  ({ params: { id } }: UpdateEventProps) => {
       {forecast && <Forecast data={forecast} />}
     </div>
   );
-  // const [cityId, setCityId] = useState<string | null>(null);
-  // const searchParams = useSearchParams();
+}
 
-  // console.log(id)
-  // return (
-  //   <div>
-  //     {cityId && <CurrentCityWeather cityId={id} />}
-  //     {/* Render other components */}
-  //   </div>
-  // );
-};
-
-export default CityPage;
+export default CurrentCityWeather;

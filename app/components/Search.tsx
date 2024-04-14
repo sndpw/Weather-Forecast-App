@@ -9,7 +9,7 @@ const Search: React.FC<{ onSearchChange: (searchData: any) => void }> = ({
 
   const loadOptions = (inputValue: string) => {
     return fetch(
-      `${GEO_API_URL}/cities?minPopulation=1000000&namePrefix=${inputValue}`,
+      `${GEO_API_URL}/cities?minPopulation=1000&namePrefix=${inputValue}`,
       geoApiOptions
     )
       .then((response) => response.json())

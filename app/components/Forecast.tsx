@@ -8,7 +8,6 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { convertKelvinToCelsius } from "../utils/convertKelvinToCelsius";
 import { convertWindSpeed } from "../utils/convertWindSpeed";
-import Divider from "@material-ui/core/Divider";
 
 interface ForecastProps {
   data: {
@@ -64,7 +63,6 @@ const Forecast = ({ data }: ForecastProps) => {
             >
               <div className="flex items-center">
                 <Typography className="mr-5">{forecastDays[idx]}</Typography>
-                <Divider orientation="vertical" flexItem />
                 <img
                   src={`http://openweathermap.org/img/w/${item.weather[0].icon}.png`}
                   alt="weather img"

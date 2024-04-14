@@ -4,7 +4,6 @@ import { convertWindSpeed } from "../utils/convertWindSpeed";
 import { FiDroplet } from "react-icons/fi";
 import { MdAir } from "react-icons/md";
 import { ImMeter } from "react-icons/im";
-import Divider from "@material-ui/core/Divider";
 
 interface CurrentWeatherProps {
   data: {
@@ -63,7 +62,7 @@ const CurrentWeather = ({ data }: CurrentWeatherProps) => {
         </Typography>
         <Typography className="parameter-label">Temperature</Typography>
       </div>
-      <Divider orientation="vertical" flexItem />
+      <div style={{borderLeft: "2px solid black"}}></div>
       <div
         style={{
           display: "flex",

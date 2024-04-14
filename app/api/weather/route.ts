@@ -41,7 +41,7 @@ interface City {
 //     return NextResponse.error();
 //   }
 // };
-export const GET = async (request: Request) => {
+export const GET = async (request: NextRequest) => {
   try {
     const apiUrl = "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/records";
     const queryParams = new URLSearchParams(request.url.split("?")[1]); // Extract query parameters from request URL

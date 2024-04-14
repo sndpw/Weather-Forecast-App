@@ -8,6 +8,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { convertKelvinToCelsius } from "../utils/convertKelvinToCelsius";
 import { convertWindSpeed } from "../utils/convertWindSpeed";
+import Divider from "@material-ui/core/Divider";
 
 interface ForecastProps {
   data: {
@@ -50,8 +51,8 @@ const Forecast = ({ data }: ForecastProps) => {
 
   return (
     <>
-      <Typography variant="h6" gutterBottom component="div">
-        Daily
+      <Typography variant="h5" style={{ padding: 15 }}>
+        Forecast For 5 Days
       </Typography>
       <div>
         {data.list.splice(0, 5).map((item, idx) => (
@@ -62,12 +63,13 @@ const Forecast = ({ data }: ForecastProps) => {
               id={`panel${idx}-header`}
             >
               <div className="flex items-center">
+                <Typography className="mr-5">{forecastDays[idx]}</Typography>
+                <Divider orientation="vertical" flexItem />
                 <img
                   src={`http://openweathermap.org/img/w/${item.weather[0].icon}.png`}
                   alt="weather img"
                   className="mr-2"
                 />
-                <Typography className="mr-2">{forecastDays[idx]}</Typography>
                 <Typography className="mr-2">
                   {item.weather[0].description}
                 </Typography>
@@ -78,34 +80,36 @@ const Forecast = ({ data }: ForecastProps) => {
               </div>
             </AccordionSummary>
             <AccordionDetails>
-              <div className="grid grid-cols-2 gap-2">
-                <div>
-                  <Typography>Pressure:</Typography>
-                  <Typography>{item.main.pressure}</Typography>
-                </div>
-                <div>
-                  <Typography>Humidity:</Typography>
-                  <Typography>{item.main.humidity}</Typography>
-                </div>
-                <div>
-                  <Typography>Clouds:</Typography>
-                  <Typography>{item.clouds.all}%</Typography>
-                </div>
-                <div>
-                  <Typography>Wind speed:</Typography>
-                  <Typography>
-                    {convertWindSpeed(item.wind.speed)} km/h
-                  </Typography>
-                </div>
-                <div>
-                  <Typography>Sea level:</Typography>
-                  <Typography>{item.main.sea_level}m</Typography>
-                </div>
-                <div>
-                  <Typography>Feels like:</Typography>
-                  <Typography>
-                    {convertKelvinToCelsius(item.main.feels_like)}°C
-                  </Typography>
+              <div>
+                <div className="grid grid-cols-2 gap-5">
+                  <div>
+                    <Typography>Pressure:</Typography>
+                    <Typography>{item.main.pressure}hPa</Typography>
+                  </div>
+                  <div>
+                    <Typography>Humidity:</Typography>
+                    <Typography>{item.main.humidity}</Typography>
+                  </div>
+                  <div>
+                    <Typography>Clouds:</Typography>
+                    <Typography>{item.clouds.all}%</Typography>
+                  </div>
+                  <div>
+                    <Typography>Wind speed:</Typography>
+                    <Typography>
+                      {convertWindSpeed(item.wind.speed)} km/h
+                    </Typography>
+                  </div>
+                  <div>
+                    <Typography>Sea level:</Typography>
+                    <Typography>{item.main.sea_level}m</Typography>
+                  </div>
+                  <div>
+                    <Typography>Feels like:</Typography>
+                    <Typography>
+                      {convertKelvinToCelsius(item.main.feels_like)}°C
+                    </Typography>
+                  </div>
                 </div>
               </div>
             </AccordionDetails>

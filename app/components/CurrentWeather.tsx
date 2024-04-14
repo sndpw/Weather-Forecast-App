@@ -1,6 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 import { convertKelvinToCelsius } from "../utils/convertKelvinToCelsius";
 import { convertWindSpeed } from "../utils/convertWindSpeed";
+import { FiDroplet } from "react-icons/fi";
+import { MdAir } from "react-icons/md";
+import { ImMeter } from "react-icons/im";
+import Divider from "@material-ui/core/Divider";
 
 interface CurrentWeatherProps {
   data: {
@@ -21,59 +25,91 @@ interface CurrentWeatherProps {
   };
 }
 
-const CurrentWeather: React.FC<CurrentWeatherProps> = ({ data }) => {
+const CurrentWeather = ({ data }: CurrentWeatherProps) => {
   return (
-    <Box className="weather bg-white p-6 rounded-lg shadow-md">
-      <Box display="flex" justifyContent="space-between">
-        <Box>
-          <Typography variant="h6" className="city">
-            {data.city}
-          </Typography>
-          <Typography variant="body1" className="weather-description">
-            {data.weather[0].description}
-          </Typography>
-        </Box>
+    <Card
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        width: "100%",
+        justifyContent: "space-around",
+        alignContent: "center",
+      }}
+    >
+      <div
+        style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+      >
+        <Typography variant="h6" className="City">
+          {data.city}
+        </Typography>
         <img
           src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`}
           alt="weather img"
-          className="w-12 h-12"
+          className="w-22 h-24"
         />
-      </Box>
-      <Box className="mt-4">
+        <Typography variant="h6" className="parameter-label">
+          {data.weather[0].description}
+        </Typography>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <Typography variant="h4" className="temperature">
           {convertKelvinToCelsius(data.main.temp)}°C
         </Typography>
-        <Box className="details mt-2">
-          <Typography variant="subtitle1" className="parameter-label">
-            Details
-          </Typography>
-          <Box>
-            <Typography className="parameter-label">Feels like</Typography>
-            <Typography className="parameter-value">
-              {convertKelvinToCelsius(data.main.feels_like)}°C
-            </Typography>
-          </Box>
-          <Box>
-            <Typography className="parameter-label">Wind</Typography>
-            <Typography className="parameter-value">
-              {convertWindSpeed(data.wind.speed)} km/h
-            </Typography>
-          </Box>
-          <Box>
-            <Typography className="parameter-label">Humidity</Typography>
-            <Typography className="parameter-value">
-              {data.main.humidity}%
-            </Typography>
-          </Box>
-          <Box>
-            <Typography className="parameter-label">Pressure</Typography>
-            <Typography className="parameter-value">
-              {data.main.pressure} hPa
-            </Typography>
-          </Box>
-        </Box>
-      </Box>
-    </Box>
+        <Typography className="parameter-label">Temperature</Typography>
+      </div>
+      <Divider orientation="vertical" flexItem />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography className="parameter-label">Feels like</Typography>
+        <Typography className="parameter-value">
+          {convertKelvinToCelsius(data.main.feels_like)}°C
+        </Typography>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <MdAir size={36} />
+        <Typography className="parameter-label">Wind</Typography>
+        <Typography>{convertWindSpeed(data.wind.speed)} km/h</Typography>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <FiDroplet size={36} color="blue" />
+        <Typography className="parameter-label">Humidity</Typography>
+        <Typography>{data.main.humidity}%</Typography>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <ImMeter size={36} />
+        <Typography className="parameter-label">Pressure</Typography>
+        <Typography>{data.main.pressure} hPa</Typography>
+      </div>
+    </Card>
   );
 };
 
